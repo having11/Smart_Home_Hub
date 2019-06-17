@@ -23,10 +23,12 @@ class Hub_Output
         void display_message(const char* message);
         void clear_lcd();
         void disable_steppers();
+        void set_led_strip(uint8_t r, uint8_t g, uint8_t b);
         ~Hub_Output();
     private:
         uint16_t _stepper_rpm;
         long _stepper_positions[2];
+        void init_led();
 };
 
 #endif

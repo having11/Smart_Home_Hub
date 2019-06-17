@@ -6,6 +6,7 @@ DRV8825 stepper1(MOTOR_STEPS, M2_DIR, M2_STEP, M2_EN);
 LiquidCrystal_I2C lcd(0x27, 20, 4);
 
 Hub_Output::Hub_Output(uint16_t rpm){
+    set_led_strip(0, 0, 0);
     uint16_t _stepper_rpm = rpm;
     lcd.begin(20, 4);
     lcd.backlight();
@@ -25,6 +26,24 @@ void Hub_Output::init_steppers(){
     stepper1.setMicrostep(MICROSTEPS);
     _stepper_positions[0] = 0;
     _stepper_positions[1] = 0;
+}
+
+void Hub_Output::set_led_strip(uint8_t r, uint8_t g, uint8_t b){
+    ledcWrite(1, r);
+    ledcWrite(2, g);
+    ledcWrite(3, b);
+}
+
+void Hub_Output::init_led(){
+    pinMode(RGB_R, OUTPUT);
+    pinMode(RGB_G, OUTPUT);
+    pinMode(RGB_B, OUTPUT);
+    ledcAttachPin(RGB_R, 1);
+    ledcAttachPin(RGB_G, 2);
+    ledcAttachPin(RGB_B, 3);
+    ledcSetup(1, 12000, 8);
+    ledcSetup(2, 12000, 8);
+    ledcSetup(3, 12000, 8);
 }
 
 void Hub_Output::disable_steppers(){

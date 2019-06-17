@@ -21,7 +21,7 @@ class Home_Hub
         void play_song(const char* name);
         void step_motor(uint8_t motor_id, int steps);
         void set_led_strip(uint8_t r, uint8_t g, uint8_t b);
-        int get_button_state(uint8_t pin);
+        bool get_button_state(uint8_t pin);
         int get_touch_state(uint8_t pin);
         ~Home_Hub(void);
     private:
