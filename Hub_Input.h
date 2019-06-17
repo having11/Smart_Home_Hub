@@ -15,6 +15,9 @@ class Hub_Input
         void poll_gesture();
         int get_latest_gesture();
         void create_button(uint8_t pin);
+        int get_button_presses(uint8_t pin);
+        bool get_button_is_pressed(uint8_t pin);
+        int get_touched_value(uint8_t pin);
         ~Hub_Input();
     private:
         volatile int _latest_gesture;
