@@ -7,7 +7,7 @@
 #define M1_DIR 7
 #define M1_EN 14
 #define M2_STEP 8
-#define M2_DIR11
+#define M2_DIR 11
 #define M2_EN 12
 
 #define BUZZER 9
