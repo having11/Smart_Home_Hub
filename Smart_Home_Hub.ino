@@ -12,5 +12,5 @@ void setup()
 
 void loop()
 {
-	
+	hub._hub_input.poll_gesture();
 }

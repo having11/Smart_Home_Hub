@@ -5,17 +5,16 @@ DRV8825 stepper0(MOTOR_STEPS, M1_DIR, M1_STEP, M1_EN);
 DRV8825 stepper1(MOTOR_STEPS, M2_DIR, M2_STEP, M2_EN);
 LiquidCrystal_I2C lcd(0x27, 20, 4);
 
-Hub_Output::Hub_Output(uint16_t rpm){
+Hub_Output::Hub_Output(){
     set_led_strip(0, 0, 0);
-    uint16_t _stepper_rpm = rpm;
     lcd.begin(20, 4);
     lcd.backlight();
     lcd.noBlink();
     lcd.noCursor();
-    init_steppers();
 }
 
-void Hub_Output::init_steppers(){
+void Hub_Output::init_steppers(uint16_t rpm){
+    uint16_t _stepper_rpm = rpm;
     stepper0.begin(_stepper_rpm);
     stepper0.setEnableActiveState(ACTIVE_STATE);
     stepper0.enable();
@@ -57,6 +56,7 @@ void Hub_Output::clear_lcd(){
 }
 
 void Hub_Output::display_message(const char* message){
+    clear_lcd();
     lcd.print(message);
 }
 

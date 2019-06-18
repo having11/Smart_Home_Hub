@@ -16,8 +16,8 @@
 class Hub_Output
 {
     public:
-        Hub_Output(uint16_t rpm);
-        void init_steppers();
+        Hub_Output();
+        void init_steppers(uint16_t rpm);
         void move_stepper(bool motor_num, int32_t steps);
         long get_stepper_position(uint8_t motor_num);
         void display_message(const char* message);
