@@ -6,7 +6,6 @@
 #include "Pin_Definitions.h"
 #include "Hub_Input.h"
 #include "Hub_Output.h"
-#include "Hub_IoT.h"
 #include "Log.h"
 #include "Buzzer.h"
 
@@ -34,7 +33,6 @@ class Home_Hub
         Basic_Functions _basic_func;
         Hub_Input _hub_input;
         Hub_Output _hub_output;
-        //Hub_IoT _hub_iot;
         Buzzer _buzzer;
         Logger _logger;
 

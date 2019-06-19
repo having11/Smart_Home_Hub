@@ -2,8 +2,10 @@
 #include "Home_Hub.h"
 #include "Hub_Input.h"
 #include "Hub_Output.h"
+#include "Hub_IoT.h"
 
 Home_Hub hub = Home_Hub();
+Hub_IoT iot_connect;
 
 const char* SSID = "wifi ssid here";
 const char* PASSWORD = "wifi password here";
@@ -14,6 +16,7 @@ uint16_t print_interval = 1000;
 void setup()
 {
 	hub.init(SSID, PASSWORD);
+	iot_connect.init(&hub);
 	latest_millis = millis();
 }
 
