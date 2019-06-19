@@ -20,6 +20,8 @@ void Home_Hub::init(const char* ssid, const char* password){
     const char* _ssid = ssid;
     const char* _password = password;
     Serial.begin(115200);
+    delay(2000);
+    WiFi.mode(WIFI_STA);
     WiFi.begin(ssid, password);
     while(WiFi.status() != WL_CONNECTED){
         delay(500);
@@ -28,6 +30,30 @@ void Home_Hub::init(const char* ssid, const char* password){
     _wifi_status = WL_CONNECTED;
     Serial.println(" CONNECTED");
     _hub_output.init_steppers(rpm);
+
+    Serial.println("Ready");
+    Serial.print("IP address: ");
+    Serial.println(WiFi.localIP());
+
+    _basic_func.init_time();
+}
+
+void Home_Hub::update(){
+    _hub_input.poll_gesture();
+}
+
+struct tm Home_Hub::get_current_time(){
+    time_data = _basic_func.get_time();
+    return time_data;
+}
+
+void Home_Hub::create_log(const char* filename, const char* header){
+    _logger.begin_log(filename, header);
+}
+
+void Home_Hub::log_to_file(const char* data, const char* filename){
+    time_data = time_data = _basic_func.get_time();
+    _logger.log_info(filename, &time_data, data);
 }
 
 void Home_Hub::step_motor(uint8_t motor_id, int32_t steps){
@@ -59,7 +85,7 @@ float Home_Hub::get_humidity(){
 }
 
 void Home_Hub::display_message(String message){
-    _hub_output.display_message(message.c_str());
+    _hub_output.display_message(message.c_str(), message.length());
 }
 
 void Home_Hub::print_time(){

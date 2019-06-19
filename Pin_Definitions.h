@@ -3,11 +3,11 @@
 #include "Arduino.h"
 
 //Stepper motor pins
-#define M1_STEP 6
-#define M1_DIR 7
+#define M1_STEP 16
+#define M1_DIR 17
 #define M1_EN 14
-#define M2_STEP 8
-#define M2_DIR 11
+#define M2_STEP 34
+#define M2_DIR 35
 #define M2_EN 12
 
 #define BUZZER 9

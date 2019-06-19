@@ -26,6 +26,10 @@ class Home_Hub
         bool get_button_state(uint8_t pin);
         int get_touch_state(uint8_t pin);
         void create_button(uint8_t pin);
+        struct tm get_current_time();
+        void log_to_file(const char* data, const char* filename);
+        void create_log(const char* filename, const char* header);
+        void update();
 
         Basic_Functions _basic_func;
         Hub_Input _hub_input;
@@ -33,6 +37,8 @@ class Home_Hub
         //Hub_IoT _hub_iot;
         Buzzer _buzzer;
         Logger _logger;
+
+        struct tm time_data;
 
         ~Home_Hub(void);
     private:

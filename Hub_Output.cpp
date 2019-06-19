@@ -3,11 +3,12 @@
 
 DRV8825 stepper0(MOTOR_STEPS, M1_DIR, M1_STEP, M1_EN);
 DRV8825 stepper1(MOTOR_STEPS, M2_DIR, M2_STEP, M2_EN);
-LiquidCrystal_I2C lcd(0x27, 20, 4);
+LiquidCrystal_I2C lcd(0x3F, 16, 2);
 
 Hub_Output::Hub_Output(){
+    init_led();
     set_led_strip(0, 0, 0);
-    lcd.begin(20, 4);
+    lcd.begin();
     lcd.backlight();
     lcd.noBlink();
     lcd.noCursor();
@@ -55,9 +56,24 @@ void Hub_Output::clear_lcd(){
     lcd.clear();
 }
 
-void Hub_Output::display_message(const char* message){
+void Hub_Output::display_message(const char* message, int length){
     clear_lcd();
-    lcd.print(message);
+    lcd.backlight();
+    int line=0;
+    for(int i=0; i<length;i++){
+        if(i%20==0){
+            line++;
+            lcd.setCursor(0,line);
+            Serial.println("new line");
+            //lcd.write(message[i]);
+        }
+        //else if(String(message[i])==String("\0")){}
+        else{
+            lcd.write(message[i]);
+            Serial.write(message[i]);
+        } 
+        //lcd.write(message[i]);
+    }
 }
 
 long Hub_Output::get_stepper_position(uint8_t motor_num){

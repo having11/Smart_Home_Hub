@@ -7,9 +7,9 @@
 
 Basic_Functions::Basic_Functions(){
     int dayLightOffset_sec = 0;
-    init_time();
     SimpleDHT22 dht22(DHT_PIN);
     pinMode(LDR, INPUT);
+    //init_time();
 }
 
 int Basic_Functions::read_light_level(){
@@ -18,10 +18,9 @@ int Basic_Functions::read_light_level(){
 
 void Basic_Functions::init_time(){
     const long gmtOffset_sec = GMT_OFFSET_HR * 3600;
-    const char* ntpServer = "pool.ntp.org";
-    if(DAYLIGHT_SAVINGS) dayLightOffset_sec = 3600;
+    if(DAYLIGHT_SAVINGS) {dayLightOffset_sec = 3600;}
     else dayLightOffset_sec = 0;
-    configTime(gmtOffset_sec, dayLightOffset_sec, ntpServer);
+    configTime(gmtOffset_sec, dayLightOffset_sec, "pool.ntp.org");
 }
 
 struct tm Basic_Functions::get_time(){

@@ -20,7 +20,7 @@ class Hub_Output
         void init_steppers(uint16_t rpm);
         void move_stepper(bool motor_num, int32_t steps);
         long get_stepper_position(uint8_t motor_num);
-        void display_message(const char* message);
+        void display_message(const char* message, int length);
         void clear_lcd();
         void disable_steppers();
         void set_led_strip(uint8_t r, uint8_t g, uint8_t b);
