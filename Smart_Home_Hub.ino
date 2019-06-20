@@ -23,6 +23,7 @@ void setup()
 void loop()
 {
 	hub.update();
+	iot_connect.refresh();
 	if(millis()-latest_millis>=print_interval) {
 		hub.print_time();
 		latest_millis = millis();
