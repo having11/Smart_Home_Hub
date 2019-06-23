@@ -24,6 +24,39 @@ void Hub_IoT::init(Home_Hub *hub){
     server.begin();
 }
 
+void Hub_IoT::publish_webhook(const char* url, String data, const char* event){
+    client.begin(url);
+    client.addHeader("Content-Type", "application/json");
+    client.addHeader("Event", event);
+    int httpRes = client.POST(data);
+    if(httpRes){
+        String response = client.getString();
+        Serial.println(httpRes);
+        Serial.println(response);
+    }
+    else{
+        Serial.print("Error: ");
+        Serial.println(httpRes);
+    }
+    client.end();
+}
+
+void Hub_IoT::publish_webhook(const char* url, String data){
+    client.begin(url);
+    client.addHeader("Content-Type", "application/json");
+    int httpRes = client.POST(data);
+    if(httpRes){
+        String response = client.getString();
+        Serial.println(httpRes);
+        Serial.println(response);
+    }
+    else{
+        Serial.print("Error: ");
+        Serial.println(httpRes);
+    }
+    client.end();
+}
+
 void Hub_IoT::refresh(){
     server.handleClient();
 }
@@ -38,6 +71,12 @@ void Hub_IoT::handle_led(){
     uint8_t b = server->arg("B").toInt();
     _hub->set_led_strip(r, g, b);
     server.send(200, "text/plain", "Set LED strip");
+}
+
+void Hub_IoT::handle_lcd(){
+    String message = server->arg("message");
+    _hub->display_message(message);
+    server.send(200, )
 }
 
 Hub_IoT::~Hub_IoT(){

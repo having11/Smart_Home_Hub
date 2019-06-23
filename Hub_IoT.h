@@ -6,6 +6,7 @@
 #include <WiFiClient.h>
 #include <WebServer.h>
 #include <ESPmDNS.h>
+#include <HTTPClient.h>
 
 class Hub_IoT
 {
@@ -18,6 +19,7 @@ class Hub_IoT
     private:
         Home_Hub *_hub;
         WebServer server;
+        HTTPClient client;
 
         void handle_basic_info();
         void handle_led();
@@ -30,6 +32,9 @@ class Hub_IoT
         void handle_touch();
         void handle_button();
         void handle_log();
+
+        void publish_webhook(const char* url, String data, const char* event);
+        void publish_webhook(const char* url, String data);
 };
 
 #endif

@@ -28,6 +28,7 @@ class Home_Hub
         struct tm get_current_time();
         void log_to_file(const char* data, const char* filename);
         void create_log(const char* filename, const char* header);
+        void play_sounds(int* melody, int* timing, int length);
         void update();
 
         Basic_Functions _basic_func;

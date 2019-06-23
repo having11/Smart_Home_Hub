@@ -28,6 +28,10 @@ void loop()
 		hub.print_time();
 		latest_millis = millis();
 	}
+	if(hub.get_temperature>28){
+		String data_str = "{temp:"+String(hub.get_temperature)+"}";
+		iot_connect.publish_webhook("ifft.com", data_str, "temperature");
+	}
 	
 
 }

@@ -56,6 +56,10 @@ void Home_Hub::log_to_file(const char* data, const char* filename){
     _logger.log_info(filename, &time_data, data);
 }
 
+void Home_Hub::play_sounds(int* melody, int* timing, int length){
+    _buzzer.generate_tones(&melody, &timing, length);
+}
+
 void Home_Hub::step_motor(uint8_t motor_id, int32_t steps){
     _hub_output.move_stepper(motor_id, steps);
 }
