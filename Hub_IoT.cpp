@@ -12,12 +12,12 @@ void Hub_IoT::init(Home_Hub *hub){
     server.on("/", handle_basic_info);
     server.on("/output/led", handle_led);
     server.on("/output/lcd", handle_lcd);
-    server.on("/output/stepper", handle_stepper);
+    server.on("/output/stepper/{}", handle_stepper);
     server.on("/basic/temperature", handle_temperature);
     server.on("/basic/humidity", handle_humidity);
     server.on("/basic/light_level", handle_light_level);
     server.on("/input/gesture", handle_gesture);
-    server.on("/input/touch", handle_touch);
+    server.on("/input/touch/pin/{}", handle_touch);
     server.on("/input/button/pin/{}", handle_button);
     server.on("/log", handle_log);
 
@@ -59,6 +59,34 @@ void Hub_IoT::publish_webhook(const char* url, String data){
 
 void Hub_IoT::refresh(){
     server.handleClient();
+}(
+
+void Hub_IoT::handle_stepper(){
+
+}
+
+void Hub_IoT::handle_temperature(){
+
+}
+
+void Hub_IoT::handle_humidity(){
+
+}
+
+void Hub_IoT::handle_light_level(){
+
+}
+
+void Hub_IoT::handle_gesture(){
+
+}
+
+void Hub_IoT::handle_touch(){
+
+}
+
+void Hub_IoT::handle_button(){
+
 }
 
 void Hub_IoT::handle_basic_info(){
