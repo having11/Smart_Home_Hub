@@ -11,23 +11,23 @@ There is a wrapper class for the home hub board called `Home_Hub`, which contain
 **Here is a list of callable functions from `Home_Hub`:**
 
 ```cpp
-void init(const char* ssid, const char* password)
-float get_temperature()
-float get_humidity()
-void display_message(String message)
-int get_light_level()
-int get_latest_gesture()
-void print_time()
-void step_motor(uint8_t motor_id, int32_t steps)
-void set_led_strip(uint8_t r, uint8_t g, uint8_t b)
-bool get_button_state(uint8_t pin)
-int get_touch_state(uint8_t pin)
-void create_button(uint8_t pin)
-struct tm get_current_time()
-void log_to_file(const char* data, const char* filename)
-void create_log(const char* filename, const char* header)
-void play_sounds(int* melody, int* timing, int length)
-void update()
+void init(const char* ssid, const char* password);
+float get_temperature();
+float get_humidity();
+void display_message(String message);
+int get_light_level();
+int get_latest_gesture();
+void print_time();
+void step_motor(uint8_t motor_id, int32_t steps);
+void set_led_strip(uint8_t r, uint8_t g, uint8_t b);
+bool get_button_state(uint8_t pin);
+int get_touch_state(uint8_t pin);
+void create_button(uint8_t pin);
+struct tm get_current_time();
+void log_to_file(const char* data, const char* filename);
+void create_log(const char* filename, const char* header);
+void play_sounds(int* melody, int* timing, int length);
+void update();
 ```
 
 ## Descriptions
