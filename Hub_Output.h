@@ -10,8 +10,8 @@
 #define MOTOR_STEPS 200
 #define MICROSTEPS 32
 #define ACTIVE_STATE LOW
-#define X 0
-#define Y 1
+#define X_AXIS 0
+#define Y_AXIS 1
 
 class Hub_Output
 {

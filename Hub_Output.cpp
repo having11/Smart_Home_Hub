@@ -24,8 +24,8 @@ void Hub_Output::init_steppers(uint16_t rpm){
     stepper1.setEnableActiveState(ACTIVE_STATE);
     stepper1.enable();
     stepper1.setMicrostep(MICROSTEPS);
-    _stepper_positions[0] = 0;
-    _stepper_positions[1] = 0;
+    _stepper_positions[X_AXIS] = 0;
+    _stepper_positions[Y_AXIS] = 0;
 }
 
 void Hub_Output::set_led_strip(uint8_t r, uint8_t g, uint8_t b){
@@ -83,11 +83,11 @@ long Hub_Output::get_stepper_position(uint8_t motor_num){
 void Hub_Output::move_stepper(bool motor_num, int32_t steps){
     if(!motor_num){
         stepper0.move(MICROSTEPS * steps);
-        _stepper_positions[0] += steps;
+        _stepper_positions[X_AXIS] += steps;
     }
     else{
         stepper1.move(MICROSTEPS * steps);
-        _stepper_positions[1] += steps;
+        _stepper_positions[Y_AXIS] += steps;
     }
 }
 

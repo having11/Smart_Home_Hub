@@ -7,31 +7,44 @@
 Home_Hub hub = Home_Hub();
 Hub_IoT iot_connect;
 
-const char* SSID = "wifi ssid here";
-const char* PASSWORD = "wifi password here";
+const char* SSID = "ssid";
+const char* PASSWORD = "password";
 
 unsigned long latest_millis = 0; 
 uint16_t print_interval = 1000; 
+byte wheelPos = 0;
 
 void setup()
 {
 	hub.init(SSID, PASSWORD);
-	iot_connect.init(&hub);
 	latest_millis = millis();
 }
 
 void loop()
 {
+	if(wheelPos > 255){
+		wheelPos = 0;
+	}
 	hub.update();
-	iot_connect.refresh();
 	if(millis()-latest_millis>=print_interval) {
 		hub.print_time();
 		latest_millis = millis();
 	}
-	if(hub.get_temperature>28){
-		String data_str = "{temp:"+String(hub.get_temperature)+"}";
-		iot_connect.publish_webhook("ifft.com", data_str, "temperature");
-	}
-	
+	Wheel(wheelPos);
+	wheelPos++;
+}
 
+void Wheel(byte wheelPos){
+	if(wheelPos < 85){
+		hub.set_led_strip(wheelPos * 3, 255 - wheelPos * 3, 0);
+	}
+	else if(wheelPos < 170){
+		wheelPos -= 85;
+		hub.set_led_strip(255 - wheelPos * 3, 0, wheelPos * 3);
+	}
+	else{
+		wheelPos -= 170;
+		hub.set_led_strip(0, wheelPos * 3, 255 - wheelPos * 3);
+	}
+	delay(20);
 }

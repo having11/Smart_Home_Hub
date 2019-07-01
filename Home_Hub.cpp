@@ -57,7 +57,7 @@ void Home_Hub::log_to_file(const char* data, const char* filename){
 }
 
 void Home_Hub::play_sounds(int* melody, int* timing, int length){
-    _buzzer.generate_tones(&melody, &timing, length);
+    _buzzer.generate_tones(melody, timing, length);
 }
 
 void Home_Hub::step_motor(uint8_t motor_id, int32_t steps){
